@@ -16,7 +16,6 @@ import { RootState } from "@/redux/rootReduxer";
 import { useRouter } from "next/navigation";
 import useAuth from "@/hooks/useAuth";
 import isEmail from "validator/lib/isEmail";
-import notify from "@/utils/notifyToast";
 
 const Page = () => {
   const router = useRouter();
