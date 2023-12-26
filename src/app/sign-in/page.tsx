@@ -1,3 +1,4 @@
+"use client";
 import {
   Box,
   Button,
@@ -9,8 +10,44 @@ import {
 
 import LeftComponent from "@/component/left-component/left-component";
 import TextBox from "@/component/text-box/text-box";
+import { ChangeEvent, useState } from "react";
+import { useSelector } from "react-redux";
+import { RootState } from "@/redux/rootReduxer";
+import { useRouter } from "next/navigation";
+import useAuth from "@/hooks/useAuth";
+import isEmail from "validator/lib/isEmail";
+import notify from "@/utils/notifyToast";
 
-const page = () => {
+const Page = () => {
+  const router = useRouter();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const { loading } = useSelector((state: RootState) => state.auth);
+
+  const { handleSignInUser } = useAuth();
+
+  const handleEmailChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setEmail(event.target.value);
+  };
+
+  const handlePasswordChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setPassword(event.target.value);
+  };
+
+  const onSuccess = () => {
+    router.push("/dashboard");
+  };
+
+  const isEmailError = !isEmail(email),
+    isPasswordError = password.length === 0;
+
+  const handleSubmit = () => {
+    console.log("Button is clicked");
+    if (isEmail(email) && password.length > 0)
+      handleSignInUser(email, password, onSuccess);
+  };
+
   return (
     <Box width="100%" height={"100vh"} display={"flex"}>
       <LeftComponent />
@@ -35,6 +72,10 @@ const page = () => {
             stylesFormLabel="font-semibold text-sm"
             stylesInput="rounded-md bg-gray-200 border h-10 w-full p-2 hover:bg-transparent focus:bg-transparent"
             typeInput="email"
+            value={email}
+            onChange={handleEmailChange}
+            errorText={"Please enter your email"}
+            isError={isEmailError}
           />
           <TextBox
             formName="Password"
@@ -42,13 +83,20 @@ const page = () => {
             stylesFormLabel="font-semibold text-sm"
             stylesInput="rounded-md bg-gray-200 border h-10 w-full p-2 hover:bg-transparent focus:bg-transparent"
             typeInput="password"
+            value={password}
+            onChange={handlePasswordChange}
+            errorText={"Please enter your password"}
+            isError={isPasswordError}
           />
+
           <Button
             backgroundColor={"#678CAC"}
             padding={"10px"}
             width={"100%"}
             className="rounded-md"
             marginTop={"10px"}
+            isLoading={loading}
+            onClick={handleSubmit}
           >
             Submit
           </Button>
@@ -58,4 +106,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

@@ -1,4 +1,4 @@
-const baseUrl = `localhost:5005/api/v1`;
+const baseUrl = `http://localhost:5005/api/v1`;
 
 // Auth Url
 export const authUrl = `${baseUrl}/auth`;
