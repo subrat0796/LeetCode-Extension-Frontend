@@ -42,7 +42,6 @@ const Page = () => {
     isPasswordError = password.length === 0;
 
   const handleSubmit = () => {
-    console.log("Button is clicked");
     if (isEmail(email) && password.length > 0)
       handleSignInUser(email, password, onSuccess);
   };

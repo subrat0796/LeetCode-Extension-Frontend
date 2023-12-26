@@ -18,12 +18,13 @@ function useAuth() {
 
   const handleSignInUser = useCallback(
     (email: string, password: string, onSuccess: any) => {
-      console.log("Reached here");
       dispatch(setEmailLogin());
       signInUser(email, password)
         .then((response) => {
           const data = response.data;
           dispatch(setEmailLoginSuccess(data));
+
+          localStorage.setItem("leetcode-extension-backend-token", data.token);
 
           notify("Signed in user successfully !", "success");
 
@@ -45,7 +46,6 @@ function useAuth() {
               "error"
             );
           }
-          console.log(error);
         });
     },
     [dispatch]
@@ -56,7 +56,8 @@ function useAuth() {
       email: string,
       password: string,
       name: string,
-      leetCodeProfileUrl: string
+      leetCodeProfileUrl: string,
+      onSuccess: any
     ) => {
       dispatch(setEmailSignup());
       signUpUser(email, password, name, leetCodeProfileUrl)
@@ -64,7 +65,11 @@ function useAuth() {
           const data = response.data;
           dispatch(setEmailSignupSuccess(data));
 
+          localStorage.setItem("leetcode-extension-backend-token", data.token);
+
           notify("Signed up user successfully !", "success");
+
+          if (onSuccess) onSuccess();
         })
         .catch((error) => {
           if (!axios.isCancel(error)) {
