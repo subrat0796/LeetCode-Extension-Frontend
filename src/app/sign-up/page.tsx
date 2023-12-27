@@ -6,6 +6,7 @@ import {
   FormHelperText,
   FormLabel,
   Input,
+  Link,
   Text,
 } from "@chakra-ui/react";
 
@@ -117,7 +118,9 @@ const Page = () => {
                 onChange={(event) => setFirstName(event.target.value)}
               />
               {isFirstNameError && (
-                <FormHelperText>{"Please enter your name"}</FormHelperText>
+                <FormHelperText className="text-sm">
+                  {"Please enter your name"}
+                </FormHelperText>
               )}
             </Box>
             <Box width={"50%"}>
@@ -181,11 +184,16 @@ const Page = () => {
             width={"100%"}
             className="rounded-md"
             marginTop={"10px"}
+            marginBottom={"10px"}
             isLoading={loading}
             onClick={handleSubmit}
           >
             Submit
           </Button>
+
+          <Link href="/sign-in" className="text-sm text-center text-blue-300">
+            Not Create Account ? Click Here To Go To Login Page
+          </Link>
         </Box>
       </Box>
     </Box>

@@ -39,12 +39,7 @@ const TextBox = ({
       />
 
       {isError && (
-        <FormHelperText
-          __css={{
-            textColor: "red",
-          }}
-          className="text-sm"
-        >
+        <FormHelperText className="text-sm text-red-500">
           {errorText}
         </FormHelperText>
       )}

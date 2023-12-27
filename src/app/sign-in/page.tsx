@@ -5,6 +5,7 @@ import {
   FormControl,
   FormLabel,
   Input,
+  Link,
   Text,
 } from "@chakra-ui/react";
 
@@ -93,11 +94,16 @@ const Page = () => {
             width={"100%"}
             className="rounded-md"
             marginTop={"10px"}
+            marginBottom={"10px"}
             isLoading={loading}
             onClick={handleSubmit}
           >
             Submit
           </Button>
+
+          <Link href="/sign-up" className="text-sm text-center text-blue-300">
+            Not Login ? Click Here To Go To Create Account Page
+          </Link>
         </Box>
       </Box>
     </Box>
