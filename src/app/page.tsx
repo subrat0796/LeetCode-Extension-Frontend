@@ -1,10 +1,14 @@
 "use client";
-import Page from "./dashboard/page";
 import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 export default function Home() {
   const router = useRouter();
-  const token = localStorage.getItem("leetcode-extension-backend-token");
+  let token;
+  useEffect(() => {
+    if (typeof window !== "undefined")
+      token = localStorage.getItem("leetcode-extension-backend-token");
+  }, []);
 
   if (!token) router.push("/sign-in");
 
