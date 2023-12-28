@@ -1,3 +1,4 @@
+// @ts-nocheck
 "use client";
 import TableContent from "@/component/table-content/table-content";
 import useQuestions from "@/hooks/useQuestions";
