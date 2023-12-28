@@ -1,4 +1,3 @@
-// const baseUrl = `http://localhost:5005/api/v1`;
 const baseUrl = `https://leetcode-extension-backend.onrender.com/api/v1`;
 
 // Auth Url

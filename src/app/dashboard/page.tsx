@@ -51,6 +51,7 @@ const Page = () => {
   const [tabIndex, setTabIndex] = useState(0);
 
   const submissionSet = new Set();
+
   userState?.matchedUserSubmissions?.forEach((submission: any) => {
     submissionSet.add(submission.submissions.questionLink);
   });
@@ -72,7 +73,7 @@ const Page = () => {
   useEffect(() => {
     handleGetUserDetails(onFailure);
     handleGetAllQuestions();
-  }, []);
+  }, [handleGetAllQuestions, handleGetUserDetails, onFailure]);
 
   if (
     userState.loading ||
