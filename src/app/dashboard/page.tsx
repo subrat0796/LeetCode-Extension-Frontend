@@ -73,7 +73,7 @@ const Page = () => {
   useEffect(() => {
     handleGetUserDetails(onFailure);
     handleGetAllQuestions();
-  }, [handleGetAllQuestions, handleGetUserDetails, onFailure]);
+  }, []);
 
   if (
     userState.loading ||
